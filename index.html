@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-    <title>Hello, world!</title>
+    <title>MQL Calculator</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -64,7 +64,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <h6>Ratio</h6>
+                <h6>CAC/CLV Ratio</h6>
                 <div class="input-group">
                   <input type="text" class="form-control text-center" id="r" disabled>
                   <span class="graph"></span>
@@ -85,7 +85,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <h6>CPL</h6>
+                <h6>MQL Price</h6>
                 <div class="input-group">
                   <input type="text" class="form-control text-center" id="cpl" disabled>
                 </div>
@@ -144,7 +144,7 @@
           let CPD = CAC * closeRatio;
           let CPL = CPD * leadValue;
           if(CPL < 200){
-            CPL_Results.value = "Your CPL is to low";
+            CPL_Results.value = "Your CLV is to low";
           }else {
             
             CPL_Results.value = `$${CPL.toLocaleString(undefined, { maximumFractionDigits: 2 })} `;
