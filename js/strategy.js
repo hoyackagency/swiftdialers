@@ -1,14 +1,9 @@
 const s = document.querySelector('input[name=s]:checked');
-const closeRatio = document.getElementById('closeRatio');
-const leadValue = document.getElementById('lv');
-
-
-
 document.getElementById('form').addEventListener('submit', submitForm);
-
 function submitForm(e) {
-
     e.preventDefault();
+    const closeRatio = document.querySelector('input[name=cr]:checked');
+    const leadValue = document.querySelector('input[name=lv]:checked');
     let strategy_name;
     let switchInput = document.querySelector('input[name=s]');
     if(switchInput.checked){

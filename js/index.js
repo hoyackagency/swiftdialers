@@ -33,7 +33,6 @@ function setupPage(mql, ratio, s) {
     strategyClosingRatio = ratio;
     strategyName = s;
 }
-
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const params = new URLSearchParams(window.location.search)
@@ -90,11 +89,8 @@ form.addEventListener('submit', (e) => {
             phoneCheckbox.classList.add('wrong');
             emailCheckbox.classList.add('wrong');
             MQL_Results.value = "Your CLV is to low";
-
         }
-
         if(params.has('s')) {
-            
             if(params.get('s') === '1')  {
                 MQL_Results.parentElement.parentElement.style.display = "none";
                 let emailValue = (( 1 - openRate ) * MQL) * responseRate;
@@ -114,11 +110,8 @@ form.addEventListener('submit', (e) => {
         showError('Please check your numbers');
     }
     
-    
 });
-
-const calculate = 
-    function showError(error) {
+function showError(error) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'alert alert-danger' ;
     errorDiv.textContent = error;
@@ -126,11 +119,11 @@ const calculate =
     const heading = document.querySelector('.heading');
     card.insertBefore(errorDiv, heading);
     setTimeout(clearError , 3000);
-    }
-    function clearError () {
+}
+function clearError () {
     document.querySelector('.alert').remove();
-    }
-    function showResults () {
+}
+function showResults () {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('results').style.display = 'block';
-    }
+}
