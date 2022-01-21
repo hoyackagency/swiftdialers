@@ -9,173 +9,239 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-<style>
-  .form-control {
-    text-align: center;
-  }
-
-  h6 {
-    margin-top: .5rem;
-  }
-
-  #results .input-group {
-    position: relative;
-  }
-
-  #results .input-group .graph {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    padding-right: 3%;
-    border-radius: 0.25rem;
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    height: 100%;
-    color: white;
-    background-color: #343a40;
-  }
-
-  #results .input-group input {
-    border: none;
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-  }
-
-  .form-check-input.wrong[type=checkbox] {
-    background-image: url('/img/times-solid.svg');
-    background-color: #fff;
-  }
-
-  i {
-    font-size: 2rem;
-  }
-
-  .form-check-input {
-    margin-top: 1.25rem;
-  }
-
-  .form-check-input:checked {
-    background-color: #212529;
-    border-color: #212529;
-    width: 20px;
-    height: 20px;
-  }
-
-  [class^="bi-"]::before,
-  [class*=" bi-"]::before {
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: #e9ecef;
-    border: 1px solid rgba(0, 0, 0, .5);
-    color: #343a40;
-  }
-</style>
+<!-- Jquery UI default style -->
+<link rel="stylesheet" href="css/jqueryui.css">
+<!-- Master CSS File -->
+<link rel="stylesheet" href="css/master.css">
 </head>
 
 <body class="bg-dark">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 mx-auto">
-        <div class="card card-body text-center mt-5">
-
-          <h1 class="heading display-5 pb-3">Enter your CLV</h1>
+      <div class="col-lg-4">
+        <div class="card card-body my-5 text-center" id="clv">
+          <h1 class="heading display-5 mb-0">CLV Calculator</h1>
+          <!-- CLV Calculator Form -->
           <form id="form">
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="clv" placeholder="CLV">
-            </div>
-            <div class="forn-group mt-3">
-              <input type="submit" value="Calculate" class="btn btn-dark btn-block">
-            </div>
-          </form>
-          <!-- LOADER -->
-
-          <div id="loading" style="display: none;">
-            <img src="img/loading.gif" alt="">
-          </div>
-
-          <!-- RESULTS -->
-          <div id="results" style="display: none;" class="pt-4">
-            <h5 class="text-left">Results</h5>
-            <div class="form-group">
-              <h6>CAC</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="cac" disabled>
-              </div>
-            </div>
-            <div class="form-group">
-              <h6>CAC/CLV Ratio</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="r" disabled>
-                <span class="graph"></span>
-              </div>
-            </div>
-            <div class="form-group">
-              <h6>Warm Lead Value</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="lv" disabled>
-                <span class="graph"></span>
-              </div>
-            </div>
-            <div class="form-group">
-              <h6>Close Ratio</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="cr" disabled>
-                <span class="graph"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <h6>MQL Price</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="mql" disabled>
-              </div>
-            </div>
-
-            <div class="form-group m-3 d-none" id="eventsBox">
-
-              <div class="row">
-                <div class="col-6">
-                  <h6>E-mail Opens : </h6>
-                  <input type="text" class="form-control text-center" id="emailOpens" disabled>
+            <!-- Average Sale -->
+            <div class="col-12">
+                <div class="form-group my-2">
+                    <label class="lead form-check-label  my-2" for="average_sales_price">
+                        Average Sale
+                    </label>
+                    <input type="text" class="form-control text-center changeable" id="average_sales_price">
                 </div>
-                <div class="col-6">
-                  <h6>Phone Dials : </h6>
-                  <input type="text" class="form-control text-center" id="phoneDials" disabled>
-                </div>
-              </div>
-              
             </div>
-            <div class="form-group mt-3">
-              <div class="row justify-content-center">
-                <div class="col-12">
-                  <div class="row">
-                    <!-- email label-->
-                    <div class="col-6">
-                      <div class="col-12">
-                        <label class="form-check-label" for="email">
-                          <i class="bi bi-envelope-fill"></i>
-                        </label>
-                      </div>
-                      <input class="form-check-input" type="checkbox" value="" id="email" disabled>
+            
+            <!-- Margin -->
+            <div class="col-12">
+
+                <div class="input-container">
+                    <label for="margin" class="lead form-check-label my-2">
+                        Margin
+                    </label>
+
+                    <div class="form-group my-2">
+                        
+                        
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <select disabled class="form-control changeable" id="margin">
+                                    <option value="5">5%</option>
+                                    <option selected="selected" value="25">25%</option>
+                                    <option value="50">50%</option>
+                                    <option value="75">75%</option>
+                                  </select>
+                            </div>
+                            <div class="col-8">
+                                <div id="margin-slider"></div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <!-- phone label-->
-                    <div class="col-6">
-                      <div class="col-12">
-                        <label class="form-check-label" for="phone">
-                          <i class="bi bi-phone-fill"></i>
-                        </label>
-                      </div>
-                      <input class="form-check-input" type="checkbox" value="" id="phone" disabled>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+
+                <!-- Purchase Frequency -->
+                <div class="input-container">
+                    <label for="purchase-frequency" class="lead form-check-label my-2">
+                        How Often Do Customers Purchase Again?
+                    </label>
+
+                    <div class="form-group my-2">
+                        
+                        
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <select disabled class="form-control changeable" id="purchase-frequency">
+                                    <option value="365">Daily</option>
+                                    <option value="104">Bi-Weekly</option>
+                                    <option value="52">Weekly</option>
+                                    <option value="24">Bi-Monthly</option>
+                                    <option value="12">Monthly</option>
+                                    <option value="4">Quarterly</option>
+                                    <option value="2">Bi-Annually </option>
+                                    <option selected="selected" value="1">Annually</option>
+                                  </select>
+                            </div>
+                            <div class="col-8">
+                                <div id='purchase-frequency-slider'></div>
+                            </div>
+                        </div>
+                        
                     </div>
+                </div>
+            </div>
+
+            <!-- Years Of Retentions -->
+            <div class="col-12">
+                
+                <div class="input-container">
+                    <label for="years-of-retentions" class="lead form-check-label my-2">
+                        How Many Years Are Customers Retained?
+                    </label>
+
+                    <div class="form-group my-2">
+                        
+                        
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <input id="years-of-retentions" class="form-control changeable" type="text" readonly >
+                            </div>
+                            <div class="col-8">
+                                <div id="years-of-retentions-slider"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Close Ratio -->
+            <div class="col-12">
+                
+                <div class="input-container">
+                    <label for="close-ratio" class="lead form-check-label my-2">
+                        Close Ratio
+                    </label>
+
+                    <div class="form-group my-2">
+                        
+                        
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <input id="close-ratio" class="form-control changeable" type="text" readonly >
+                            </div>
+                            <div class="col-8">
+                                <div  id="close-ratio-slider"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+          </form>            
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card card-body my-5" id="risk">
+         
+          <h1 class="heading display-5 pb-3 text-center">Risk</h1>
+          <form id="form">
+              <div class="bar">
+                  <span class="risk-rate">50%</span>
+                  <div class="radial-wrapper">
+                      <div class="radial-section radial-right-section">
+                        <div class="wedge"></div>
+                      </div>
+                      <div class="radial-section radial-left-section">
+                        <div class="wedge"></div>
+                      </div>
+                      <div class="marker start"></div>
+                      <div class="marker end"></div>
+                    </div>
+                    <div class="radial-wrapper radial-progress-wrapper">
+                      <div class="radial-section radial-right-section">
+                        <div class="wedge"></div>
+                      </div>
+                      <div class="radial-section radial-left-section">
+                        <div class="wedge"></div>
+                      </div>
+                      <div class="marker start"></div>
+                      <div class="marker end"></div>
+                    </div>
+                    <span class="low">Low</span>
+                    <span class="high">High</span>
+              </div>
+              <div class="form-group text-center mt-3">
+                  <h6 class="lead">Deal Status</h6>
+                  <div class="input-group">
+                    <input type="text" class="form-control text-center" id="status" disabled>
                   </div>
                 </div>
+                <div class="forn-group text-center mt-3">
+                  <input type="submit" id="generateQuoteBtn" value="Generate Quote" class="btn btn-dark btn-block">
+                </div>
+          </form>
+          
+          
+          
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card card-body my-5" id="strategy">
+         
+          <h1 class="heading display-5 pb-3 text-center">Strategy Settings </h1>
+          <form id="form">
+
+              
+            <div class="form-group mt-3 text-center">
+              <label class="form-check-label lead" for="eventsCheckBox">Results Up Front</label>
+
+              <div class="form-check form-switch-lg form-switch mt-3">
+                <input class="form-check-input changeable" type="checkbox"  id="eventsCheckBox" checked>
               </div>
             </div>
-          </div>
+            <div class="form-group mt-3 text-center">
+              <label class="form-check-label lead" for="leadCheckBox">Lead Generation</label>
+
+              <div class="form-check form-switch-lg form-switch mt-3">
+                <input class="form-check-input changeable" type="checkbox"  id="leadCheckBox">
+              </div>
+            </div>
+            <div class="form-group mt-3 text-center">
+              <label class="form-check-label lead" for="paymentCheckBox">Payment Plan</label>
+
+              <div class="form-check form-switch-lg form-switch mt-3">
+                <input class="form-check-input changeable" type="checkbox"  id="paymentCheckBox" checked>
+              </div>
+            </div>
+            <div class="row campaign-types mt-3 text-center">
+              <!-- email label-->
+              <div class="col-6">
+                <div class="col-12">
+                  <label class="form-check-label" for="email">
+                    <i class="bi bi-envelope-fill"></i>
+                  </label>
+                </div>
+                <input class="form-check-input changeable" type="checkbox" value="" id="email" checked>
+              </div>
+              <!-- phone label-->
+              <div class="col-6">
+                <div class="col-12">
+                  <label class="form-check-label" for="phone">
+                    <i class="bi bi-phone-fill"></i>
+                  </label>
+                </div>
+                <input class="form-check-input changeable" type="checkbox" value="" id="phone" checked>
+              </div>
+            </div>
+          </form>
+          
+          
+          
         </div>
       </div>
     </div>
@@ -188,8 +254,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
   </script>
+  <!-- Jquery  -->
+  <script src="js/jquery.js"></script>
+  <!--Jquery UI-->
+  <script src="js/jqueryui.js"></script>
   <!-- Optional JavaScript -->
-  <script src="js/index.js"></script>
+  <script src="js/app.js"></script>
 </body>
 
 </html>

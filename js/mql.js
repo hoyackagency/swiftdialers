@@ -58,7 +58,6 @@ form.addEventListener('submit', (e) => {
         leadValue = Number(params.get('lv'))/100;
         ratio = params.has('r') ? Number(params.get('r')) : ratio;
     }
-
     r_Value.nextElementSibling.textContent = `${((1/ratio) * 100).toFixed(0)}%`;
     r_Value.nextElementSibling.style.width = `${((1/ratio) * 100).toFixed(0)}%`;
     lv_Value.nextElementSibling.textContent = `${leadValue * 100}%`;

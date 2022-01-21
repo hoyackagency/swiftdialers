@@ -1,0 +1,175 @@
+/* CLV */
+#margin-slider .ui-slider-range,
+#purchase-frequency-slider .ui-slider-range,
+#years-of-retentions-slider .ui-slider-range,
+#close-ratio-slider .ui-slider-range {
+  background: #1c1f23;
+}
+#margin-slider .ui-slider-handle,
+#purchase-frequency-slider .ui-slider-handle,
+#years-of-retentions-slider .ui-slider-handle,
+#close-ratio-slider .ui-slider-handle {
+  border-color: #1c1f23;
+}
+#margin-slider .ui-state-active,
+#purchase-frequency-slider .ui-state-active,
+#years-of-retentions-slider .ui-state-active,
+#close-ratio-slider .ui-state-active {
+  border: 1px solid #c5c5c5;
+  background: #f6f6f6;
+}
+/* risk graph */
+.bar {
+  height: 180px;
+  position: relative;
+}
+.bar span.risk-rate {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 45%;
+  font-size: 20px;
+  z-index: 2;
+}
+.bar span.low {
+  position: absolute;
+  left: 21%;
+    top: 83%;
+  font-size: 20px;
+  z-index: 2;
+}
+.bar span.high {
+  position: absolute;
+  left: 70%;
+    top: 82%;
+  font-size: 20px;
+  z-index: 2;
+}
+.radial-wrapper {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  left: calc(50% - 90px);
+  transform: rotateZ(45deg);
+}
+.radial-wrapper::after {
+  content: "";
+  background: #fff;
+  border-radius: 50%;
+  width: 156px;
+  height: 156px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.radial-progress-wrapper .wedge,
+.radial-progress-wrapper .marker {
+  background: #212529;
+}
+
+.radial-progress-wrapper .radial-left-section .wedge {
+  transform: rotateZ(-45deg);
+}
+
+.radial-progress-wrapper .radial-right-section .wedge {
+  transform: rotateZ(-181deg);
+}
+
+.radial-progress-wrapper .marker.end {
+  transform: rotateZ(-45deg);
+}
+
+.radial-section {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 90px;
+}
+
+.wedge {
+  background: #dbdbdb;
+  height: 180px;
+  width: 90px;
+  transition: all 1s linear;
+}
+
+.radial-left-section {
+  left: 0;
+}
+.radial-left-section .wedge {
+  border-radius: 180px 0 0 180px;
+  transform-origin: 90px 90px;
+  transform: rotateZ(0deg);
+}
+
+.radial-right-section {
+  left: 90px;
+}
+.radial-right-section .wedge {
+  border-radius: 0 180px 180px 0;
+  left: 0;
+  transform-origin: 0 50%;
+  transform: rotateZ(-90deg);
+}
+
+.marker {
+  background: #dbdbdb;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 6px);
+  transform-origin: 50% 90px;
+  transform: rotateZ(-180deg);
+}
+.marker.end {
+  transform: rotateZ(90deg);
+  transition: all 1s linear;
+}
+
+input {
+  padding: 10px 0;
+  width: 200px;
+}
+/* strategy */
+#strategy .form-check-input {
+  width: 3em;
+}
+.form-check-input:checked {
+  background-color: #212529;
+  border-color: #212529;
+}
+.campaign-types .form-check-input:not(:checked) {
+  background-image: url("/img/times-solid.svg");
+  background-color: #fff;
+}
+.campaign-types i {
+  font-size: 2rem;
+}
+
+.campaign-types .form-check-input {
+  margin-top: 1.25rem;
+}
+
+.campaign-types .form-check-input:checked {
+  background-color: #212529;
+  border-color: #212529;
+  width: 20px;
+  height: 20px;
+}
+
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #e9ecef;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #343a40;
+}
+.form-check {
+  width: fit-content;
+  margin: 0 auto;
+}

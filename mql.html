@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<title>MQL Calculator</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+<style>
+  .form-control {
+    text-align: center;
+  }
+
+  h6 {
+    margin-top: .5rem;
+  }
+
+  #results .input-group {
+    position: relative;
+  }
+
+  #results .input-group .graph {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 3%;
+    border-radius: 0.25rem;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: white;
+    background-color: #343a40;
+  }
+
+  #results .input-group input {
+    border: none;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+
+  .form-check-input.wrong[type=checkbox] {
+    background-image: url('/img/times-solid.svg');
+    background-color: #fff;
+  }
+
+  i {
+    font-size: 2rem;
+  }
+
+  .form-check-input {
+    margin-top: 1.25rem;
+  }
+
+  .form-check-input:checked {
+    background-color: #212529;
+    border-color: #212529;
+    width: 20px;
+    height: 20px;
+  }
+
+  [class^="bi-"]::before,
+  [class*=" bi-"]::before {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0, 0, 0, .5);
+    color: #343a40;
+  }
+</style>
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+        <div class="card card-body text-center mt-5">
+
+          <h1 class="heading display-5 pb-3">Enter your CLV</h1>
+          <form id="form">
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="clv" placeholder="CLV">
+            </div>
+            <div class="forn-group mt-3">
+              <input type="submit" value="Calculate" class="btn btn-dark btn-block">
+            </div>
+          </form>
+          <!-- LOADER -->
+
+          <div id="loading" style="display: none;">
+            <img src="img/loading.gif" alt="">
+          </div>
+
+          <!-- RESULTS -->
+          <div id="results" style="display: none;" class="pt-4">
+            <h5 class="text-left">Results</h5>
+            <div class="form-group">
+              <h6>CAC</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="cac" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <h6>CAC/CLV Ratio</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="r" disabled>
+                <span class="graph"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <h6>Warm Lead Value</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="lv" disabled>
+                <span class="graph"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <h6>Close Ratio</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="cr" disabled>
+                <span class="graph"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <h6>MQL Price</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="mql" disabled>
+              </div>
+            </div>
+
+            <div class="form-group m-3 d-none" id="eventsBox">
+
+              <div class="row">
+                <div class="col-6">
+                  <h6>E-mail Opens : </h6>
+                  <input type="text" class="form-control text-center" id="emailOpens" disabled>
+                </div>
+                <div class="col-6">
+                  <h6>Phone Dials : </h6>
+                  <input type="text" class="form-control text-center" id="phoneDials" disabled>
+                </div>
+              </div>
+              
+            </div>
+            <div class="form-group mt-3">
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="row">
+                    <!-- email label-->
+                    <div class="col-6">
+                      <div class="col-12">
+                        <label class="form-check-label" for="email">
+                          <i class="bi bi-envelope-fill"></i>
+                        </label>
+                      </div>
+                      <input class="form-check-input" type="checkbox" value="" id="email" disabled>
+                    </div>
+                    <!-- phone label-->
+                    <div class="col-6">
+                      <div class="col-12">
+                        <label class="form-check-label" for="phone">
+                          <i class="bi bi-phone-fill"></i>
+                        </label>
+                      </div>
+                      <input class="form-check-input" type="checkbox" value="" id="phone" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Cleave , Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.5.3/dist/cleave.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  <!-- Optional JavaScript -->
+  <script src="js/mql.js"></script>
+</body>
+
+</html>

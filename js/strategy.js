@@ -11,5 +11,5 @@ function submitForm(e) {
     }else{
         strategy_name = "1";
     }
-    window.location.href = `index.html?s=${strategy_name}&cr=${closeRatio.value}&lv=${leadValue.value}`
+    window.location.href = `mql.html?s=${strategy_name}&cr=${closeRatio.value}&lv=${leadValue.value}`
 }
