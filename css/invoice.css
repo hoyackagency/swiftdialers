@@ -1,0 +1,66 @@
+body {
+  background: #e7e9ed;
+  color: #535b61;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.text-1 {
+  font-size: 12px !important;
+  font-size: 0.75rem !important;
+}
+
+.text-7 {
+  font-size: 28px !important;
+  font-size: 1.75rem !important;
+}
+
+
+hr {
+  opacity: 0.15;
+}
+
+.card-header {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
+
+/* Table */
+.table > :not(:last-child) > :last-child > * {
+  border-bottom-color: inherit;
+}
+
+.table:not(.table-sm) > :not(caption) > * > * {
+  padding: 0.75rem;
+}
+
+.table-sm > :not(caption) > * > * {
+  padding: 0.3rem;
+}
+
+
+/* =================================== */
+/*  Layouts
+/* =================================== */
+.invoice-container {
+  margin: 15px auto;
+  padding: 70px;
+  max-width: 850px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+  .invoice-container {
+    padding: 35px 20px 70px 20px;
+    margin-top: 0px;
+    border: none;
+    border-radius: 0px;
+  }
+}
+

@@ -199,7 +199,11 @@ let emailsPerDay = 30;
 let burdenRate = 55;
 let emailWeight = 5;
 let hoursInDay = 8;
-
+let paymentPlan = 12 ;
+let months;
+let closer_comission;
+let closer;
+let r;
 function getDifferentRisks(lv = leadValue) {
 
   // calc clv
@@ -214,8 +218,10 @@ function getDifferentRisks(lv = leadValue) {
   // calc mql
   let closeRatio = $( "#close-ratio" ).val() / 100 ;
   let CAC = clv/ratio;
-  let CPD = CAC * closeRatio;
-  let MQL = CPD * lv;
+  let CPD = CAC * lv;
+  let MQL = CPD * closeRatio;
+  //calc Closer Comission
+  closer_comission =  CAC - CPD;
   // Calc Cost Per Dial & Open
   let emailValue = (( 1 - openRate ) * MQL) * responseRate;
   let phoneValue = MQL * responseRate;
@@ -227,6 +233,11 @@ function getDifferentRisks(lv = leadValue) {
   let phoneRisk = (((((phoneRate * 2) - burdenRate) / phoneRate) / 2) * 100).toFixed(2);
   let combinedRisk = ((Number(emailRisk) + Number(phoneRisk) ) /2 ).toFixed(2);
 
+  r = {
+     MQL,
+     emailValue,
+     phoneValue
+  }
   return {
     emailRisk,
     phoneRisk,
@@ -363,6 +374,7 @@ $('.changeable').on('change', function (e) {
 
           //acceptance
           acceptance(phoneRisk);
+
         }
       }
 
@@ -431,6 +443,11 @@ function disable_checkbox(input){
 function acceptance(acceptedRisk) {
   $('#status').val('The Deal Is Acceptable')
   showRisk(acceptedRisk)
+  //Calc Payment Plan Months &  mql_payment
+  
+  months =  Math.round((acceptedRisk/100) * paymentPlan ) ;
+  closer = closer_comission / ((acceptedRisk/100) * paymentPlan);
+  mql_payment =  r.MQL / ((acceptedRisk/100) * paymentPlan );
   $('#generateQuoteBtn').prop('disabled', false)
   return;
 }
@@ -462,6 +479,25 @@ function showRisk(risk) {
 
 }
 
+// // Generate Quote Cases
+$('#risk-form').on('submit', function (e) {
+
+  let quote_data = {
+    mql_price : r.MQL ,
+    cost_per_dial : r.phoneValue ,
+    cost_per_open : r.emailValue ,
+    payment_months : months,
+    mql_payment : mql_payment ,
+    closer_comission: closer_comission,
+    closer : closer,
+    result_status : result_toggler.checked,
+    lead_status : lead_toggler.checked,
+    payment_status : payment_toggler.checked,
+  }
+  e.preventDefault(); 
+  window.location.href = `invoice.html?mql=${quote_data.mql_price}&cpo=${quote_data.cost_per_open}&cpd=${quote_data.cost_per_dial}&months=${quote_data.payment_months}&mql_payment=${mql_payment}&closer_comission=${closer_comission}&closer=${closer}&result=${quote_data.result_status}&lead=${quote_data.lead_status}&payment=${quote_data.payment_status}`
+})
 
 
-  
+
+
