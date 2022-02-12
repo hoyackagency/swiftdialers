@@ -190,6 +190,7 @@ changeProgressDial(50);
 // End Risk
 // main Variables
 const strategy_form = document.querySelector("#strategy form");
+let closeRatio;
 let leadValue = 0.25;
 let ratio = 3;
 let openRate = 0.25;
@@ -216,7 +217,7 @@ function getDifferentRisks(lv = leadValue) {
   // clv eq
   const clv = (((formValues.averageSale * formValues.purchaseFrequency) * formValues.yearOfRetentions) * ( formValues.margin/100 ))
   // calc mql
-  let closeRatio = $( "#close-ratio" ).val() / 100 ;
+  closeRatio = $( "#close-ratio" ).val() / 100 ;
   let CAC = clv/ratio;
   let CPD = CAC * lv;
   let MQL = CPD * closeRatio;
@@ -236,7 +237,8 @@ function getDifferentRisks(lv = leadValue) {
   r = {
      MQL,
      emailValue,
-     phoneValue
+     phoneValue,
+     lv
   }
   return {
     emailRisk,
@@ -490,12 +492,15 @@ $('#risk-form').on('submit', function (e) {
     mql_payment : mql_payment ,
     closer_comission: closer_comission,
     closer : closer,
+    lv: r.lv,
+    closeRatio: closeRatio,
+    ratio : ratio,
     result_status : result_toggler.checked,
     lead_status : lead_toggler.checked,
     payment_status : payment_toggler.checked,
   }
   e.preventDefault(); 
-  window.location.href = `invoice.html?mql=${quote_data.mql_price}&cpo=${quote_data.cost_per_open}&cpd=${quote_data.cost_per_dial}&months=${quote_data.payment_months}&mql_payment=${mql_payment}&closer_comission=${closer_comission}&closer=${closer}&result=${quote_data.result_status}&lead=${quote_data.lead_status}&payment=${quote_data.payment_status}`
+  window.location.href = `quote.html?mql=${quote_data.mql_price}&cpo=${quote_data.cost_per_open}&cpd=${quote_data.cost_per_dial}&months=${quote_data.payment_months}&mql_payment=${mql_payment}&closer_comission=${closer_comission}&closer=${closer}&lv=${quote_data.lv}&closeRatio=${quote_data.closeRatio}&ratio=${quote_data.ratio}&result=${quote_data.result_status}&lead=${quote_data.lead_status}&payment=${quote_data.payment_status}`
 })
 
 

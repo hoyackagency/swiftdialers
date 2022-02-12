@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Invoice</title>
+    <title>Quote</title>
     <!-- Web Fonts -->
     <link
       rel="stylesheet"
@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" type="text/css" href="css/invoice.css" />
+    <link rel="stylesheet" type="text/css" href="css/quote.css" />
   </head>
   <body>
     <!-- Container -->
@@ -30,10 +30,10 @@
       <header>
         <div class="row align-items-center">
           <div class="col-sm-7 text-center text-sm-start mb-3 mb-sm-0">
-            <img id="logo" src="img/logo.png" title="Koice" alt="Koice" />
+            <img id="logo" src="img/logo.png" title="HOYACK" alt="HOYACK" />
           </div>
           <div class="col-sm-5 text-center text-sm-end">
-            <h4 class="text-7 mb-0">Invoice</h4>
+            <h4 class="text-7 mb-0">Quote</h4>
           </div>
         </div>
         <hr />
@@ -44,28 +44,35 @@
         <div class="row">
           <div class="col-sm-6"><strong>Date:</strong> 05/12/2020</div>
           <div class="col-sm-6 text-sm-end">
-            <strong>Invoice No:</strong> 16835
+            <strong>Quote No:</strong> 16835
           </div>
         </div>
         <hr />
         <div class="row">
           <div class="col-sm-6 text-sm-end order-sm-1">
-            <strong>Pay To:</strong>
-            <address>
-              Koice Inc<br />
-              2705 N. Enterprise St<br />
-              Orange, CA 92865<br />
-              contact@koiceinc.com
-            </address>
+            <div class="form-group">
+              <h6>Close Ratio</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="cr" disabled>
+                <span class="graph"></span>
+              </div>
+            </div>
           </div>
           <div class="col-sm-6 order-sm-0">
-            <strong>Invoiced To:</strong>
-            <address>
-              Smith Rhodes<br />
-              15 Hodges Mews, High Wycombe<br />
-              HP12 3JL<br />
-              United Kingdom
-            </address>
+            <div class="form-group">
+              <h6>CAC/CLV Ratio</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="r" disabled>
+                <span class="graph"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <h6>Warm Lead Value</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="lv" disabled>
+                <span class="graph"></span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -109,7 +116,7 @@
             class="btn btn-light border text-black-50 shadow-none"
             ><i class="bi bi-printer-fill"></i> Print</a
           >
-          <a href="" class="btn btn-light border text-black-50 shadow-none"
+          <a  class="btn btn-light border text-black-50 shadow-none"
             ><i class="bi bi-cloud-download-fill"></i> Download</a
           >
         </div>
@@ -122,6 +129,6 @@
   <!-- Jquery  -->
   <script src="js/jquery.js"></script>
   <!-- Optional JavaScript -->
-  <script src="js/invoice.js"></script>
+  <script src="js/quote.js"></script>
   </body>
 </html>

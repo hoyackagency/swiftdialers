@@ -64,3 +64,40 @@ hr {
   }
 }
 
+#logo {
+
+  width: 200px;
+  position: relative;
+  left: -52px;
+}
+@media(max-width:576px){
+  #logo {
+    left: 0;
+  }
+}
+.input-group {
+  margin-bottom: 1rem;
+}
+.input-group h6 {
+  font-weight: bold;
+}
+.input-group .graph {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 3%;
+  border-radius: 0.25rem;
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: white;
+  background-color: #343a40;
+}
+
+ .input-group input {
+  border: none;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
