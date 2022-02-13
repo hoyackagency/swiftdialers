@@ -20,7 +20,9 @@ body {
 hr {
   opacity: 0.15;
 }
-
+h6 {
+  font-weight:500;
+}
 .card-header {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -100,4 +102,33 @@ hr {
   border: none;
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
+}
+
+i.i-check {
+  font-size: 2rem;
+}
+
+
+.form-check-input {
+  margin-top: 1.25rem;
+}
+
+.form-check-input:checked {
+  background-color: #212529;
+  border-color: #212529;
+  width: 20px;
+  height: 20px;
+}
+
+i.i-check[class^="bi-"]::before,
+i.i-check[class*=" bi-"]::before {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #e9ecef;
+  border: 1px solid rgba(0, 0, 0, .5);
+  color: #343a40;
+}
+.form-check-input[type=checkbox]:not(:checked) {
+  background-image: url('/img/times-solid.svg');
+  background-color: #fff;
 }

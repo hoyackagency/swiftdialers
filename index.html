@@ -22,7 +22,7 @@
       <div class="col-lg-4 order-1">
         <div class="card card-body my-5 text-center" id="clv">
           <h1 class="heading display-5 mb-0">CLV Calculator</h1>
-          <!-- CLV Calculator Form -->
+          <!-- CLV Calculator Form -->  
           <form id="clv-form">
             <!-- Average Sale -->
             <div class="col-12">
@@ -185,6 +185,31 @@
                 <div class="forn-group text-center mt-3">
                   <input type="submit" id="generateQuoteBtn" value="Generate Quote" class="btn btn-dark btn-block">
                 </div>
+                <div class="form-group text-center mt-3" id="mql-row">
+                  <h6 class="lead" id="mql-title">MQL Price</h6>
+                  <div class="input-group">
+                    <input type="text" class="form-control text-center" id="mqlPrice" disabled>
+                  </div>
+                </div>
+                <div class="form-group m-3" id="eventsBox" style="display: none;">
+                  <div class="table-responsive">
+                    <table class="table mb-0">
+                      <thead class="card-header">
+                        <tr>
+                          <td class="col-2 text-center"><strong>E-mail</strong></td>
+                          <td class="col-2 text-center"><strong>Phone</strong></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="col-2 text-center"><strong id="emailOpens"></strong></td>
+                          <td class="col-2 text-center"><strong id="phoneDials"></strong></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                </div>
           </form>
           
           
@@ -236,6 +261,12 @@
                   </label>
                 </div>
                 <input class="form-check-input changeable" type="checkbox" value="" id="phone" checked>
+              </div>
+            </div>
+            <div class="form-group text-center mt-3">
+              <h6 class="lead">Campaign Description</h6>
+              <div class="input-group">
+                <input type="text" class="form-control text-center" id="description" disabled>
               </div>
             </div>
           </form>

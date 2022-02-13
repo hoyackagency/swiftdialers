@@ -84,8 +84,9 @@ result_toggler.addEventListener("change" , ()=> {
         result_toggler.parentElement.previousElementSibling.textContent = "Priced Per Task";
         // Uncheck other toggler & disabled it 
         lead_toggler.disabled = true;
-        payment_toggler.checked = false;
         payment_toggler.disabled = true;
+        $('#paymentCheckBox').prop("checked" , false);
+        $('#paymentCheckBox').trigger("change");
     }
 });
 
@@ -205,6 +206,8 @@ let months;
 let closer_comission;
 let closer;
 let r;
+let landed_deal;
+let total_landed_deal;
 function getDifferentRisks(lv = leadValue) {
 
   // calc clv
@@ -238,7 +241,8 @@ function getDifferentRisks(lv = leadValue) {
      MQL,
      emailValue,
      phoneValue,
-     lv
+     lv,
+     CAC
   }
   return {
     emailRisk,
@@ -319,11 +323,11 @@ $('.changeable').on('change', function (e) {
     }
 
   } else {
-
+    
     //Combined Risk Logic
 
     if($('#email').is(':checked') && $('#phone').is(':checked')) {
-
+      
       let {combinedRisk} = getDifferentRisks();
 
       if(combinedRisk < 50) {
@@ -359,25 +363,24 @@ $('.changeable').on('change', function (e) {
       if(phoneRisk < 50) {
         //too risky 
         tooRisky(phoneRisk);
-
       }else if(phoneRisk > 80) {
-    
+        
         //lv = 25%
         phoneRisk = getDifferentRisks(0.25).phoneRisk
-    
         if(phoneRisk < 50 ) {
           
           phoneRisk = getDifferentRisks(0.50).phoneRisk;
-        
           //acceptance with lv = 50%
           acceptance(phoneRisk);
 
         }else if(phoneRisk > 50) {
-
           //acceptance
           acceptance(phoneRisk);
 
         }
+      }else {
+        //acceptance
+        acceptance(phoneRisk);
       }
 
     }
@@ -409,6 +412,9 @@ $('.changeable').on('change', function (e) {
           //acceptance
           acceptance(emailRisk);
         }
+      }else {
+        //acceptance
+        acceptance(emailRisk);
       }
       
     }
@@ -439,18 +445,86 @@ function disable_checkbox(input){
 }
 
 
+function Campaign_Description () {
+  if ($('#email').is(":checked") && $('#phone').is(":checked")){
+    //set Compaign Description 
+    $('#description').val('Phone & E-mail Campaign');
 
+  }else if ($('#email').is(":checked")){
+    // set Compaign Description 
+    $('#description').val('E-mail Campaign Only');
+
+  }else {
+    // set Compaign Description 
+    $('#description').val('Telemarketing Campaign Only');
+
+  }
+}
+function Set_MQL(landed_deal , total_landed_deal) {
+  if($('#eventsCheckBox').is(":checked")  && !$('#leadCheckBox').is(":checked") && !$('#paymentCheckBox').is(":checked")){
+
+    // Lead Generation  with payment plan OFF
+    $('#eventsBox').css("display" , 'none');
+    $('#mql-row').css("display" , 'block');
+    let price = r.MQL.toLocaleString(undefined, { maximumFractionDigits: 2 }) ;
+    $('#mqlPrice').val(`$${price}`);
+  }else if($('#eventsCheckBox').is(":checked")  && !$('#leadCheckBox').is(":checked") && $('#paymentCheckBox').is(":checked")){
+
+    // Lead Generation  with payment plan ON
+    $('#eventsBox').css("display" , 'none');
+    $('#mql-row').css("display" , 'block');
+    let price = mql_payment.toLocaleString(undefined, { maximumFractionDigits: 2 }) ;
+    $('#mqlPrice').val(`$${price}`);
+  }else if ($('#eventsCheckBox').is(":checked")  && $('#leadCheckBox').is(":checked") && !$('#paymentCheckBox').is(":checked")){
+
+      
+      // Sales Closing  with payment plan OFF 
+      $('#eventsBox').css("display" , 'none');
+      $('#mql-row').css("display" , 'block');
+      let price = total_landed_deal.toLocaleString(undefined, { maximumFractionDigits: 2 }) ;
+      $('#mqlPrice').val(`$${price}`);
+  }else if ($('#eventsCheckBox').is(":checked")  && $('#leadCheckBox').is(":checked") && $('#paymentCheckBox').is(":checked")){
+
+    // Sales Closing  with payment plan ON
+    $('#eventsBox').css("display" , 'none');
+    $('#mql-row').css("display" , 'block');
+    let price = landed_deal.toLocaleString(undefined, { maximumFractionDigits: 2 }) ;
+    $('#mqlPrice').val(`$${price}`);
+  }else if (!$('#eventsCheckBox').is(":checked")  && !$('#leadCheckBox').is(":checked") && !$('#paymentCheckBox').is(":checked")) {
+    // Priced Per Task
+    $('#mql-row').css("display" , 'none');
+    $('#eventsBox').css("display" , 'block');
+    let phone_price = r.phoneValue.toLocaleString(undefined, { maximumFractionDigits: 2 }) ;
+    let email_price = r.emailValue.toLocaleString(undefined, { maximumFractionDigits: 2 }) ;
+    if ($('#email').is(":checked") && $('#phone').is(":checked")){
+      
+      $('#phoneDials').text(`$${phone_price}`);
+      $('#emailOpens').text(`$${email_price}`);
+    }else if ($('#email').is(":checked")){
+      $('#phoneDials').text(`N/A`);
+      $('#emailOpens').text(`$${email_price}`);
+    }else {
+      $('#phoneDials').text(`$${phone_price}`);
+      $('#emailOpens').text(`N/A`);
+    }
+  }
+
+}
 
 
 function acceptance(acceptedRisk) {
   $('#status').val('The Deal Is Acceptable')
   showRisk(acceptedRisk)
-  //Calc Payment Plan Months &  mql_payment
-  
+  //Calc Payment Plan Months , closer , landed deal &  mql_payment
   months =  Math.round((acceptedRisk/100) * paymentPlan ) ;
   closer = closer_comission / ((acceptedRisk/100) * paymentPlan);
+  landed_deal =  r.CAC / ((acceptedRisk/100) * paymentPlan ) ;
+  total_landed_deal =  landed_deal * ((acceptedRisk/100) * paymentPlan ) ;
   mql_payment =  r.MQL / ((acceptedRisk/100) * paymentPlan );
   $('#generateQuoteBtn').prop('disabled', false)
+  //Set Compain Description 
+  Campaign_Description ();
+  Set_MQL(landed_deal,total_landed_deal);
   return;
 }
 
@@ -459,6 +533,8 @@ function tooRisky(risk) {
   showRisk(risk)
   //disable generate quote btn 
   $('#generateQuoteBtn').prop('disabled', true)
+  //Set Compain Description 
+  Campaign_Description ();
   return;
 }
 
@@ -495,12 +571,17 @@ $('#risk-form').on('submit', function (e) {
     lv: r.lv,
     closeRatio: closeRatio,
     ratio : ratio,
+    cac : r.CAC,
+    emailCheck : $('#email').is(":checked"),
+    phoneCheck : $('#phone').is(":checked"),
+    landed_deal : landed_deal,
+    total_landed_deal : total_landed_deal,
     result_status : result_toggler.checked,
     lead_status : lead_toggler.checked,
     payment_status : payment_toggler.checked,
   }
   e.preventDefault(); 
-  window.location.href = `quote.html?mql=${quote_data.mql_price}&cpo=${quote_data.cost_per_open}&cpd=${quote_data.cost_per_dial}&months=${quote_data.payment_months}&mql_payment=${mql_payment}&closer_comission=${closer_comission}&closer=${closer}&lv=${quote_data.lv}&closeRatio=${quote_data.closeRatio}&ratio=${quote_data.ratio}&result=${quote_data.result_status}&lead=${quote_data.lead_status}&payment=${quote_data.payment_status}`
+  window.location.href = `quote.html?mql=${quote_data.mql_price}&cpo=${quote_data.cost_per_open}&cpd=${quote_data.cost_per_dial}&months=${quote_data.payment_months}&mql_payment=${mql_payment}&closer_comission=${closer_comission}&closer=${closer}&lv=${quote_data.lv}&closeRatio=${quote_data.closeRatio}&ratio=${quote_data.ratio}&cac=${quote_data.cac}&email=${quote_data.emailCheck}&phone=${quote_data.phoneCheck}&landed_deal=${quote_data.landed_deal}&result=${quote_data.result_status}&lead=${quote_data.lead_status}&payment=${quote_data.payment_status}`
 })
 
 
