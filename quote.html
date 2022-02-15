@@ -68,53 +68,17 @@
           </div>
           <div class="col-12">
             <div class="form-group">
-              <h6 class="text-center">Warm Lead Value</h6>
+              <h6 class="text-center">Close Ratio</h6>
               <div class="input-group">
                 <input type="text" class="form-control text-center" id="lv" disabled>
                 <span class="graph"></span>
               </div>
             </div>  
           </div>
-          <div class="col-12">
-            <div class="form-group">
-              <h6 class="text-center">Close Ratio</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="cr" disabled>
-                <span class="graph"></span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="form-group" id="mql-row">
-              <h6 class="text-center">MQL Price</h6>
-              <div class="input-group">
-                <input type="text" class="form-control text-center" id="mql" disabled="">
-              </div>
-            </div>
-            <div class="form-group mb-3" id="eventsBox" style="display: none;">
-              <div class="table-responsive">
-                <table class="table mb-0">
-                  <thead class="card-header">
-                    <tr>
-                      <td class="col-2 text-center"><strong>E-mail</strong></td>
-                      <td class="col-2 text-center"><strong>Phone</strong></td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col-2 text-center"><strong id="emailOpens"></strong></td>
-                      <td class="col-2 text-center"><strong id="phoneDials"></strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              
-            </div>
-          </div>
           <div class="col-12 mb-3">
-            <div class="row">
+            <div class="row align-items-center">
               <!-- email label-->
-              <div class="col-6 text-center">
+              <div class="col-4 text-center">
                 <div class="col-12">
                   <label class="form-check-label" for="email">
                     <i class="bi bi-envelope-fill i-check"></i>
@@ -122,8 +86,11 @@
                 </div>
                 <input class="form-check-input" type="checkbox" value="" id="email" disabled="">
               </div>
+              <div class="col-4 phone-email-container">
+                <h3 id="description"></h3>
+              </div>
               <!-- phone label-->
-              <div class="col-6 text-center">
+              <div class="col-4 text-center">
                 <div class="col-12">
                   <label class="form-check-label" for="phone">
                     <i class="bi bi-phone-fill i-check"></i>
@@ -164,6 +131,9 @@
             </div>
           </div>
         </div>
+        <p class="text-center mt-4">
+          <strong id="x-payments"></strong> 
+        </p>
       </main>
       <!-- Footer -->
       <footer class="text-center mt-4">
@@ -177,9 +147,9 @@
             class="btn btn-light border text-black-50 shadow-none"
             ><i class="bi bi-printer-fill"></i> Print</a
           >
-          <a  class="btn btn-light border text-black-50 shadow-none"
-            ><i class="bi bi-cloud-download-fill"></i> Download</a
-          >
+            <!-- <a  class="btn btn-light border text-black-50 shadow-none"
+              ><i class="bi bi-cloud-download-fill"></i> Download</a
+            > -->
         </div>
       </footer>
     </div>

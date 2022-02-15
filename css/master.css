@@ -181,3 +181,7 @@ input {
     font-size: 0.90rem;
   }
 }
+
+@media print {
+  body {-webkit-print-color-adjust: exact;}
+}

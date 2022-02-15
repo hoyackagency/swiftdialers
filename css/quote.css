@@ -132,3 +132,12 @@ i.i-check[class*=" bi-"]::before {
   background-image: url('/img/times-solid.svg');
   background-color: #fff;
 }
+.phone-email-container h3{
+  font-size: 18px;
+  text-align: center;
+}
+@media(max-width:567px){
+  .phone-email-container h3{
+    font-size: 16px;
+  }
+}
